@@ -6,9 +6,9 @@
  * http://github.com/mcurry/cakephp/tree/master/snippets/app_helper_url
  * http://www.pseudocoder.com/archives/2009/02/27/how-to-save-half-a-second-on-every-cakephp-requestand-maintain-reverse-routing
  *
- * @author      Matt Curry <matt@pseudocoder.com>
+ * @author		Matt Curry <matt@pseudocoder.com>
  * @author		José Lorenzo Rodríguez
- * @license     MIT
+ * @license		MIT
  *
  */
 
@@ -26,15 +26,15 @@ class UrlCacheAppHelper extends Helper {
 	$done = Configure::read('UrlCache.runtime.beforeRender');
 	if (!$done) {
 		if (Configure::read('UrlCache.pageFiles')) {
-	      $view =& ClassRegistry::getObject('view');
-	      $path = $view->here;
-	      if ($this->here == '/') {
-	        $path = 'home';
-	      }
-	      $this->_key = '_' . strtolower(Inflector::slug($path));
-	    }
+		  $view =& ClassRegistry::getObject('view');
+		  $path = $view->here;
+		  if ($this->here == '/') {
+			$path = 'home';
+		  }
+		  $this->_key = '_' . strtolower(Inflector::slug($path));
+		}
 		$this->_key = 'url_map' . $this->_key;
-	    UrlCacheManager::$cache = Cache::read($this->_key, '_cake_core_');
+		UrlCacheManager::$cache = Cache::read($this->_key, '_cake_core_');
 		$this->_extras = array_intersect_key($this->params, array_combine($this->_paramFields, $this->_paramFields));
 		Configure::write('UrlCache.runtime.beforeRender', true);
 	}
@@ -62,19 +62,19 @@ class UrlCacheAppHelper extends Helper {
  * @see Helper::url()
  */
   function url($url = null, $full = false) {
-    $keyUrl = $url;
-    if (is_array($keyUrl)) {
-      $keyUrl += $this->_extras;
-    }
+	$keyUrl = $url;
+	if (is_array($keyUrl)) {
+	  $keyUrl += $this->_extras;
+	}
 
-    $key = md5(serialize($keyUrl) . $full);
-    if (UrlCacheManager::get($key)) {
-      return UrlCacheManager::get($key);
-    }
+	$key = md5(serialize($keyUrl) . $full);
+	if (UrlCacheManager::get($key)) {
+	  return UrlCacheManager::get($key);
+	}
 
 	$url = parent::url($url, $full);
-    UrlCacheManager::set($key, $url);
-    return $url;
+	UrlCacheManager::set($key, $url);
+	return $url;
   }
 }
 
