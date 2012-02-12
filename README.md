@@ -18,7 +18,7 @@ If debug is set to greater than 0 the cache expires in 10 seconds.  With debug a
 		...
 	}
 
-4. Thats it!  Just continue using $html->link as you usually do. 
+4. Thats it!  Just continue using $this->Html->link as you usually do. 
 
 By default all the cache will be stored in one file.
 You can set the option Configure::write('UrlCache.pageFiles', true) and each page will keep a seperate cache.
