@@ -1,16 +1,25 @@
 <?php
-App::import('Vendor', 'UrlCache.url_cache_app_helper');
-App::import('Helper', 'Html');
+App::uses('View', 'View');
+App::uses('Controller', 'Controller');
+App::uses('Cache', 'Cache');
+App::uses('UrlCacheAppHelper', 'UrlCache.View/Helper');
+App::uses('CakeRequest', 'Network');
 
-class UrlCacheTestCase extends CakeTestCase {
+
+class FakeHtmlHelper extends UrlCacheAppHelper {
+
+}
+
+class UrlCacheTest extends CakeTestCase {
   var $HtmlHelper = null;
 
-	function startTest() {
-		$this->HtmlHelper = new HtmlHelper();
+	function setup() {
+		$this->HtmlHelper = new FakeHtmlHelper(new View(new Controller));
+		$this->HtmlHelper->request = new CakeRequest(null, false);
 		$this->HtmlHelper->beforeRender();
 	}
 	
-	function endTest() {
+	function tearDown() {
 		Cache::delete($this->HtmlHelper->_key, '_cake_core_');
 	}
 

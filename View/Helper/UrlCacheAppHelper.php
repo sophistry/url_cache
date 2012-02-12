@@ -12,6 +12,9 @@
  *
  */
 
+App::uses('Helper', 'View');
+App::uses('Inflector', 'Utility');
+
 class UrlCacheAppHelper extends Helper {
   var $_key = '';
   var $_extras = array();
@@ -26,8 +29,7 @@ class UrlCacheAppHelper extends Helper {
 	$done = Configure::read('UrlCache.runtime.beforeRender');
 	if (!$done) {
 		if (Configure::read('UrlCache.pageFiles')) {
-		  $view =& ClassRegistry::getObject('view');
-		  $path = $view->here;
+		  $path = $this->_View->here;
 		  if ($this->here == '/') {
 			$path = 'home';
 		  }
@@ -35,7 +37,7 @@ class UrlCacheAppHelper extends Helper {
 		}
 		$this->_key = 'url_map' . $this->_key;
 		UrlCacheManager::$cache = Cache::read($this->_key, '_cake_core_');
-		$this->_extras = array_intersect_key($this->params, array_combine($this->_paramFields, $this->_paramFields));
+		$this->_extras = array_intersect_key($this->request->params, array_combine($this->_paramFields, $this->_paramFields));
 		Configure::write('UrlCache.runtime.beforeRender', true);
 	}
   }
