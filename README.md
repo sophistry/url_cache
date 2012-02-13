@@ -20,7 +20,19 @@ If debug is set to greater than 0 the cache expires in 10 seconds.  With debug a
 
 4. Thats it!  Just continue using $this->Html->link as you usually do. 
 
-By default all the cache will be stored in one file.
-You can set the option Configure::write('UrlCache.pageFiles', true) and each page will keep a seperate cache.
-I added this option in the event your site has a ton of unique urls don't want to store them all in one giant cache,
-which would need to be loaded each request.
+By default all the cache will be stored in one file. This is only recommended for sites with not many links.
+If your site has a ton of unique urls you don't want to store them all in one giant cache which would need to be loaded each request.
+You can set the option Configure::write('UrlCache.pageFiles', true) and each page will additionally keep a seperate cache for those unique urls.
+Only the controller/action urls without named or passed params will then be stored in the global cache.
+
+There is also a Configure::write('UrlCache.verbosePrefixes', true) param.
+It is useful if you defined some prefixes in your core.php like `Configure::write('Routing.prefixes', array('admin'));` 
+and if you mainly still use the old 1.2/1.3 syntax for prefixes:
+
+    'admin' => true/false
+
+instead of 
+
+    'prefix' => 'admin'
+
+Enjoy!
