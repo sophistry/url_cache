@@ -11,6 +11,8 @@ class UrlCacheTest extends CakeTestCase {
 	public $HtmlHelper = null;
 
 	public function setUp() {
+		parent::setUp();
+
 		Configure::write('UrlCache.active', true);
 		Configure::write('UrlCache.pageFiles', true);
 		Configure::write('UrlCache.verbosePrefixes', true);
@@ -24,6 +26,8 @@ class UrlCacheTest extends CakeTestCase {
 		Cache::delete(UrlCacheManager::$cacheKey, '_cake_core_');
 		Cache::delete(UrlCacheManager::$cachePageKey, '_cake_core_');
 		Configure::delete('UrlCache');
+
+		parent::tearDown();
 	}
 
 	public function testInstance() {
