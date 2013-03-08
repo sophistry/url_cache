@@ -25,7 +25,7 @@ class UrlCacheAppHelper extends Helper {
 	 *
 	 * @return void
 	 */
-	function beforeRender($layoutFile = null) {
+	public function beforeRender($viewFile = null) {
 		if (!Configure::read('UrlCache.active') || Configure::read('UrlCache.runtime.beforeRender')) {
 			return;
 		}
@@ -40,7 +40,7 @@ class UrlCacheAppHelper extends Helper {
 	 *
 	 * @return void
 	 */
-	function afterLayout($layoutFile = null) {
+	public function afterLayout($layoutFile = null) {
 		if (!Configure::read('UrlCache.active') || Configure::read('UrlCache.runtime.afterLayout')) {
 			return;
 		}
@@ -57,7 +57,7 @@ class UrlCacheAppHelper extends Helper {
 	 * @return string
 	 * @see Helper::url()
 	 */
-	function url($url = null, $full = false) {
+	public function url($url = null, $full = false) {
 		if (Configure::read('UrlCache.active')) {
 			if ($cachedUrl = UrlCacheManager::get($url, $full)) {
 				return $cachedUrl;
