@@ -1,0 +1,20 @@
+{
+  "name": "sophistry/url_cache",
+  "description": "CakePHP plugin to speed up URL reverse lookup",
+  "type": "cakephp-plugin",
+  "keywords": [
+    "cakephp",
+    "routing",
+    "helper"
+  ],
+  "homepage": "https://github.com/sophistry/url_cache",
+  "license": "MIT",
+  "authors": [
+  ],
+  "require": {
+    "composer/installers": "*"
+  },
+  "extra": {
+    "installer-name": "UrlCache"
+  }
+}
